@@ -3,10 +3,14 @@ package com.bridgelabz.employeepayrollapp.dto;
 import lombok.Data;
 
 @Data
-public class EmployeePayrollDto {
+public class EmployeePayrollDTO {
 
     private String name;
     private double salary;
+
+    public EmployeePayrollDTO(String arun, long l) {
+    }
+
     public String getName() {
         return name;
     }
