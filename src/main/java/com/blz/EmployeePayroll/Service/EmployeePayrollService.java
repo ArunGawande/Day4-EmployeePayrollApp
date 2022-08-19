@@ -1,12 +1,15 @@
 package com.blz.EmployeePayroll.Service;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import com.blz.EmployeePayroll.Dto.EmployeePayrollDto;
 import com.blz.EmployeePayroll.Exception.EmployeeNotFoundException;
+import com.blz.EmployeePayroll.Exception.MethodArgumentNotValidException;
 import com.blz.EmployeePayroll.Model.Department;
 import com.blz.EmployeePayroll.Model.EmployeePayrollModel;
 import com.blz.EmployeePayroll.Repository.IDepartmentRepository;
@@ -92,15 +95,16 @@ public class EmployeePayrollService implements IEmployeePayrollService {
         Optional<Department> isDepartmentPresent=deptRepo.findById(departmentId);
         if(isDepartmentPresent.isPresent()) {
             employeePayrollModel.setDepartment(isDepartmentPresent.get());
+            repo.save(employeePayrollModel);
 
         }
-        repo.save(employeePayrollModel);
+        return employeePayrollModel;
+//        throw new MethodArgumentNotValidException();
 
 //		employeePayrollModel.setName(employeeDto.getName());
 //		employeePayrollModel.setSalary(employeeDto.getSalary());
 //		employeePayrollModel.setEmailId(employeeDto.getEmailId());
 //		employeePayrollModel.setPwd(employeeDto.getPwd());
-        return employeePayrollModel;
     }
 
     @Override
